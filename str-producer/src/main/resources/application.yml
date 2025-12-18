@@ -1,3 +1,11 @@
+# a aplicação usa localhost:9092 porque:
+#    1. Ela roda fora da rede Docker.
+#    2. A porta 9092 é a que foi exposta no docker-compose.yml para o mundo exterior (localhost).
+
+
+#   A porta 29092 é usada apenas para comunicação interna, entre containers que estão na mesma rede Docker (como o kafdrop
+#   se conectando ao kafka).
+
 server:
   port: 8000
 spring:
