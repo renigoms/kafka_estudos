@@ -54,6 +54,27 @@ services:
       timeout: 10s
       retries: 3
       start_period: 60s
+  
+  payment:
+    image: renigoms/payment-service:1.0.1
+    networks:
+      - broker-kafka
+    depends_on:
+      - kafka
+    ports:
+      - "8000:8000"
+    environment:
+      KAFKA_HOST: kafka:29092
+
+  consumer:
+    image: renigoms/json-consumer:1.0.1
+    networks:
+      - broker-kafka
+    depends_on:
+      - kafka
+      - payment
+    environment:
+      KAFKA_HOST: kafka:29092
 
 networks:
   broker-kafka:
